@@ -4,8 +4,6 @@ use strict;
 use vars qw($VERSION);
 $VERSION = '0.01';
 
-use Filter::Util::Call;
-
 sub import {
     my($class, @pkg) = @_;
     return unless @pkg;
