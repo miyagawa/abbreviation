@@ -2,7 +2,7 @@ package abbreviation;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 sub import {
     my($class, @pkg) = @_;
@@ -27,10 +27,15 @@ sub _abbr {
     my $lastone = pop @pkg;
 
     # Mission:
-    # Foo::Bar::Baz => F::B::Baz
-    # Foo::bar::Baz => F::b::Baz
-    # FooBar::Bar::Baz => FB::B::Baz
-    return join '::', (map { tr/A-Z0-9//cd; $_; } @pkg), $lastone;
+    # Foo::Bar::Baz -> F::B::Baz
+    # Foo::bar::Baz -> F::b::Baz
+    # FooBar::Bar::Baz -> FB::B::Baz
+    # FOO::Bar -> F::Bar
+    return join '::', (map {
+	s/^([A-Z])[A-Z0-9]+$/$1/; # FOO -> F
+	tr/A-Z0-9//cd;
+	$_;
+    } @pkg), $lastone;
 }
 
 1;
