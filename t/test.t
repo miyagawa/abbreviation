@@ -3,7 +3,7 @@ use Test;
 BEGIN { plan tests => 7 }
 
 use lib qw(testlib);
-use abbreviation qw(Foo FooBar::Baz FooBar::Baz::Doh CAPS::On)
+use abbreviation qw(Foo FooBar::Baz FooBar::Baz::Doh CAPS::On);
 
 ok(Foo->new);
 ok(FooBar::Baz->new);
